@@ -1,6 +1,7 @@
 // import 'dart:convert';
 
 class DeerChara {
+  final int CIPHER_NUM = 8;
   String _plain = ""; // 1文字
   List<int> _cipher = [0, 0, 0, 0, 0, 0, 0, 0]; // UTF-16の文字コードを2bitずつ
 
@@ -15,9 +16,24 @@ class DeerChara {
     }
   }
 
-  void deerEncrypt() {}
+  void deerEncrypt() {
+    // 2bitずつ切り出す
+    int chrCode = _plain.codeUnitAt(0); // 文字コードを取得
+    int mask = 3;
+    for (int i = CIPHER_NUM - 1; i >= 0; i--) {
+      _cipher[i] = (chrCode & mask);
+      chrCode = (chrCode >> 2);
+    }
+  }
 
-  void deerDecrypt() {}
+  void deerDecrypt() {
+    int chrCode = 0;
+    for (int i = 0; i < CIPHER_NUM; i++) {
+      chrCode += _cipher[i];
+      chrCode = (chrCode << 2);
+    }
+    _plain = String.fromCharCode(chrCode);
+  }
 
   String getPlain() {
     return _plain;
@@ -53,4 +69,10 @@ class DeerChara {
       }
     }
   }
+}
+
+void main() {
+  String str = "伊藤";
+  final num = str[0].runes;
+  print(num);
 }

@@ -29,8 +29,8 @@ class DeerChara {
   void deerDecrypt() {
     int chrCode = 0;
     for (int i = 0; i < CIPHER_NUM; i++) {
-      chrCode += _cipher[i];
       chrCode = (chrCode << 2);
+      chrCode += _cipher[i];
     }
     _plain = String.fromCharCode(chrCode);
   }
@@ -69,10 +69,4 @@ class DeerChara {
       }
     }
   }
-}
-
-void main() {
-  String str = "伊藤";
-  final num = str[0].runes;
-  print(num);
 }

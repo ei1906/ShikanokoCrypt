@@ -4,6 +4,11 @@ class DeerChara {
   final int CIPHER_NUM = 8;
   String _plain = ""; // 1文字
   List<int> _cipher = [0, 0, 0, 0, 0, 0, 0, 0]; // UTF-16の文字コードを2bitずつ
+  bool _error = false;
+
+  bool isError() {
+    return _error;
+  }
 
   DeerChara(String chara) {
     if (chara.length == 1) {
@@ -12,7 +17,7 @@ class DeerChara {
     } else {
       // todo: charaのサイズが奇数だった場合の対応
       setCipher(chara);
-      deerDecrypt();
+      if (!isError()) deerDecrypt();
     }
   }
 
@@ -64,6 +69,7 @@ class DeerChara {
           _cipher[i ~/ 2] = 3;
           break;
         default:
+          _error = true;
           _cipher[i ~/ 2] = -1;
           break;
       }

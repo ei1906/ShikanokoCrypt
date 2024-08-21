@@ -3,9 +3,14 @@ import 'package:shikanoko/DeerChara.dart';
 class DeerString {
   // テキストボックスからの入力，暗号文か平文かは不定
   List<DeerChara> _string = [];
+  bool _error = false;
 
   DeerString() {
     // nothing
+  }
+
+  bool isError() {
+    return _error;
   }
 
   String getPlain() {
@@ -29,10 +34,18 @@ class DeerString {
   }
 
   void setPlain(String str) {
+    // 平文を1文字ずつDeerCharaクラスに入れていく
+    for (int i = 0; i < str.length; i++) {
+      _string.add(DeerChara(str[i]));
+    }
     return;
   }
 
   void setCipher(String str) {
+    // 2文字×8ずつDeerCharaクラスに入れていく
+    for (int i = 16; i < str.length; i += 16) {
+      _string.add(DeerChara(str.substring(i - 16, i)));
+    }
     return;
   }
 
@@ -47,6 +60,7 @@ class DeerString {
       case 3:
         return "たん";
       default:
+        _error = true; // エラー処理
         return "エラー";
     }
   }

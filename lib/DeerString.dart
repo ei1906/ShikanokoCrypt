@@ -3,6 +3,7 @@ import 'package:shikanoko/DeerChara.dart';
 class DeerString {
   // テキストボックスからの入力，暗号文か平文かは不定
   List<DeerChara> _string = [];
+  // 暗号化/復号の過程でエラーが出たかどうか
   bool _error = false;
 
   DeerString() {
@@ -43,7 +44,7 @@ class DeerString {
 
   void setCipher(String str) {
     // 2文字×8ずつDeerCharaクラスに入れていく
-    for (int i = 16; i < str.length; i += 16) {
+    for (int i = 16; i <= str.length; i += 16) {
       _string.add(DeerChara(str.substring(i - 16, i)));
     }
     return;

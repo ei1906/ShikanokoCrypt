@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
@@ -31,7 +32,11 @@ class MyApp extends StatelessWidget {
   Widget getAppContents() {
     return Column(children: [
       getTitleLogo(),
-      getInputForm('Input'),
+      getSpace(),
+      getFrame(200, 700, getInputForm('Input')),
+      getSpace(),
+      getFrame(200, 700, getResultForm()),
+      getSpace(),
     ]);
   }
 
@@ -40,12 +45,32 @@ class MyApp extends StatelessWidget {
     return const Text('しかのこ暗号');
   }
 
+  Widget getFrame(double h, double w, Widget c) {
+    return Container(
+      height: h,
+      width: w,
+      child: c,
+      decoration: BoxDecoration(
+        border: Border.all(
+          color: Colors.brown, // 枠線の色を設定
+        ),
+      ),
+    );
+  }
+
   Widget getInputForm(String hint) {
     return const TextField(
       decoration: InputDecoration(
-        border: OutlineInputBorder(),
         hintText: 'Input Cipher or Crypt',
       ),
     );
+  }
+
+  Widget getResultForm() {
+    return const Text('Result');
+  }
+
+  Widget getSpace() {
+    return const Spacer();
   }
 }

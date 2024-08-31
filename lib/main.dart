@@ -82,7 +82,7 @@ class MyApp extends StatelessWidget {
           ;
         }),
         getSpace(),
-        getButton('暗号化', () {
+        getButton('復号', () {
           ;
         }),
         getSpace(),

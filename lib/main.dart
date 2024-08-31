@@ -37,6 +37,8 @@ class MyApp extends StatelessWidget {
       getSpace(),
       getFrame(200, 700, getResultForm()),
       getSpace(),
+      getButtons(),
+      getSpace(),
     ]);
   }
 
@@ -68,6 +70,29 @@ class MyApp extends StatelessWidget {
 
   Widget getResultForm() {
     return const Text('Result');
+  }
+
+  Widget getButtons() {
+    return Row(
+      children: [
+        getSpace(),
+        getButton('暗号化', () {
+          ;
+        }),
+        getSpace(),
+        getButton('暗号化', () {
+          ;
+        }),
+        getSpace(),
+      ],
+    );
+  }
+
+  Widget getButton(String text, void Function() callback) {
+    return OutlinedButton(
+      onPressed: callback,
+      child: Text(text),
+    );
   }
 
   Widget getSpace() {

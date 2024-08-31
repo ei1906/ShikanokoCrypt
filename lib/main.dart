@@ -43,8 +43,10 @@ class MyApp extends StatelessWidget {
   }
 
   Widget getTitleLogo() {
-    // 一時的にテキストを配置
-    return const Text('しかのこ暗号');
+    return Image.asset(
+      'images/shikanoko_logo.jpg',
+      width: 400,
+    );
   }
 
   Widget getFrame(double h, double w, Widget c) {

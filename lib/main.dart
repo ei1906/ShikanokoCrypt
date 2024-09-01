@@ -7,16 +7,21 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  MyApp({super.key});
-
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'しかのこ暗号',
       theme: ThemeData.light(),
-      home: getHomeScreen(),
+      home: HomeScreen(),
     );
+  }
+}
+
+class HomeScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return getHomeScreen();
   }
 
   Widget getHomeScreen() {
@@ -24,21 +29,24 @@ class MyApp extends StatelessWidget {
         body: Center(
       child: SizedBox(
         width: 700,
-        child: getAppContents(),
+        child: AppContents(),
       ),
     ));
+  }
+}
+
+class AppContents extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return getAppContents();
   }
 
   Widget getAppContents() {
     return Column(children: [
       getTitleLogo(),
-      getSpace(),
-      getFrame(200, 700, getInputForm('Input')),
-      getSpace(),
-      getFrame(200, 700, getResultForm()),
-      getSpace(),
-      getButtons(),
-      getSpace(),
+      Space(),
+      getForms(),
+      Space(),
     ]);
   }
 
@@ -47,6 +55,36 @@ class MyApp extends StatelessWidget {
       'images/shikanoko_logo.jpg',
       width: 400,
     );
+  }
+
+  Widget getForms() {
+    return Forms();
+  }
+}
+
+class Forms extends StatefulWidget {
+  @override
+  _FormsState createState() => _FormsState();
+}
+
+class _FormsState extends State<Forms> {
+  // 状態を保持するグローバル変数
+  String inputText = '';
+  String resultText = '';
+
+  @override
+  Widget build(BuildContext context) {
+    return getForms();
+  }
+
+  Widget getForms() {
+    return Column(children: [
+      getFrame(200, 700, getInputForm('Input')),
+      Space(),
+      getFrame(200, 700, getResultForm()),
+      Space(),
+      getButtons(),
+    ]);
   }
 
   Widget getFrame(double h, double w, Widget c) {
@@ -71,21 +109,25 @@ class MyApp extends StatelessWidget {
   }
 
   Widget getResultForm() {
-    return const Text('Result');
+    return Text(resultText);
   }
 
   Widget getButtons() {
     return Row(
       children: [
-        getSpace(),
+        Space(),
         getButton('暗号化', () {
-          ;
+          setState(() {
+            resultText = '暗号化したよ';
+          });
         }),
-        getSpace(),
+        Space(),
         getButton('復号', () {
-          ;
+          setState(() {
+            resultText = '復号したよ';
+          });
         }),
-        getSpace(),
+        Space(),
       ],
     );
   }
@@ -95,6 +137,13 @@ class MyApp extends StatelessWidget {
       onPressed: callback,
       child: Text(text),
     );
+  }
+}
+
+class Space extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return getSpace();
   }
 
   Widget getSpace() {

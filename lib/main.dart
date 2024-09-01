@@ -1,6 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+import './back.dart';
 
 void main() {
   runApp(MyApp());
@@ -80,7 +79,7 @@ class _FormsState extends State<Forms> {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        getFrame(200, 700, getInputForm('Input')),
+        getFrame(150, 700, getInputForm('Input')),
         ColumnSpace(h: 10),
         getFrame(200, 700, getResultForm()),
         ColumnSpace(h: 10),
@@ -103,9 +102,12 @@ class _FormsState extends State<Forms> {
   }
 
   Widget getInputForm(String hint) {
-    return const TextField(
+    return TextField(
+      onChanged: (value) {
+        inputText = value;
+      },
       decoration: InputDecoration(
-        hintText: 'Input Cipher or Crypt',
+        hintText: hint,
       ),
     );
   }
@@ -119,13 +121,13 @@ class _FormsState extends State<Forms> {
       children: [
         getButton('暗号化', () {
           setState(() {
-            resultText = '暗号化したよ';
+            resultText = onclickEncrypt(inputText);
           });
         }),
         RowSpace(w: 20),
         getButton('復号', () {
           setState(() {
-            resultText = '復号したよ';
+            resultText = onclickDecrypt(inputText);
           });
         }),
       ],

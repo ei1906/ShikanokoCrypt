@@ -44,9 +44,8 @@ class AppContents extends StatelessWidget {
   Widget getAppContents() {
     return Column(children: [
       getTitleLogo(),
-      Space(),
+      ColumnSpace(h: 50),
       getForms(),
-      Space(),
     ]);
   }
 
@@ -78,13 +77,16 @@ class _FormsState extends State<Forms> {
   }
 
   Widget getForms() {
-    return Column(children: [
-      getFrame(200, 700, getInputForm('Input')),
-      Space(),
-      getFrame(200, 700, getResultForm()),
-      Space(),
-      getButtons(),
-    ]);
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        getFrame(200, 700, getInputForm('Input')),
+        ColumnSpace(h: 10),
+        getFrame(200, 700, getResultForm()),
+        ColumnSpace(h: 10),
+        getButtons(),
+      ],
+    );
   }
 
   Widget getFrame(double h, double w, Widget c) {
@@ -115,19 +117,17 @@ class _FormsState extends State<Forms> {
   Widget getButtons() {
     return Row(
       children: [
-        Space(),
         getButton('暗号化', () {
           setState(() {
             resultText = '暗号化したよ';
           });
         }),
-        Space(),
+        RowSpace(w: 20),
         getButton('復号', () {
           setState(() {
             resultText = '復号したよ';
           });
         }),
-        Space(),
       ],
     );
   }
@@ -140,13 +140,30 @@ class _FormsState extends State<Forms> {
   }
 }
 
-class Space extends StatelessWidget {
+class ColumnSpace extends StatelessWidget {
+  final double h;
+  const ColumnSpace({super.key, required this.h});
+
   @override
   Widget build(BuildContext context) {
     return getSpace();
   }
 
   Widget getSpace() {
-    return const Spacer();
+    return SizedBox(height: h);
+  }
+}
+
+class RowSpace extends StatelessWidget {
+  final double w;
+  const RowSpace({super.key, required this.w});
+
+  @override
+  Widget build(BuildContext context) {
+    return getSpace();
+  }
+
+  Widget getSpace() {
+    return SizedBox(width: w);
   }
 }

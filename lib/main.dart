@@ -123,7 +123,7 @@ class _FormsState extends State<Forms> {
   }
 
   Widget getResultForm() {
-    return Text(resultText);
+    return SelectableText(resultText);
   }
 
   Widget getButtons() {

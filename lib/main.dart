@@ -35,6 +35,8 @@ class HomeScreen extends StatelessWidget {
 }
 
 class AppContents extends StatelessWidget {
+  AppContents({super.key});
+
   @override
   Widget build(BuildContext context) {
     return getAppContents();
@@ -43,7 +45,7 @@ class AppContents extends StatelessWidget {
   Widget getAppContents() {
     return Column(children: [
       getTitleLogo(),
-      ColumnSpace(h: 50),
+      const ColumnSpace(h: 10),
       getForms(),
     ]);
   }
@@ -79,10 +81,10 @@ class _FormsState extends State<Forms> {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        getFrame(150, 700, getInputForm('Input')),
-        ColumnSpace(h: 10),
+        getFrame(100, 700, getInputForm('Input')),
+        const ColumnSpace(h: 10),
         getFrame(200, 700, getResultForm()),
-        ColumnSpace(h: 10),
+        const ColumnSpace(h: 10),
         getButtons(),
       ],
     );
@@ -96,6 +98,7 @@ class _FormsState extends State<Forms> {
       decoration: BoxDecoration(
         border: Border.all(
           color: Colors.brown, // 枠線の色を設定
+          width: 3, // 枠線の太さを設定
         ),
       ),
     );
@@ -103,11 +106,18 @@ class _FormsState extends State<Forms> {
 
   Widget getInputForm(String hint) {
     return TextField(
+      maxLength: 30,
+      maxLines: 5,
       onChanged: (value) {
         inputText = value;
       },
+      style: TextStyle(
+        fontSize: 30.0, // フォントサイズを設定
+      ),
       decoration: InputDecoration(
         hintText: hint,
+        counterText: '',
+        border: InputBorder.none,
       ),
     );
   }
@@ -124,7 +134,7 @@ class _FormsState extends State<Forms> {
             resultText = onclickEncrypt(inputText);
           });
         }),
-        RowSpace(w: 20),
+        const RowSpace(w: 20),
         getButton('復号', () {
           setState(() {
             resultText = onclickDecrypt(inputText);

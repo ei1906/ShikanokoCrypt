@@ -133,21 +133,41 @@ class _FormsState extends State<Forms> {
           setState(() {
             resultText = onclickEncrypt(inputText);
           });
-        }),
+        }, Icons.lock),
         const RowSpace(w: 20),
         getButton('復号', () {
           setState(() {
             resultText = onclickDecrypt(inputText);
           });
-        }),
+        }, Icons.lock_open),
       ],
     );
   }
 
-  Widget getButton(String text, void Function() callback) {
+  /*Widget getButton(String text, void Function() callback) {
     return OutlinedButton(
       onPressed: callback,
       child: Text(text),
+    );
+  }*/
+
+  Widget getButton(String text, void Function() callback, IconData ic) {
+    return ElevatedButton(
+      onPressed: callback,
+      style: ElevatedButton.styleFrom(
+        backgroundColor: Colors.brown, // 錠前の色を意識した配色
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10), // 錠前の丸みを意識
+        ),
+        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+      ),
+      child: Row(
+        children: [
+          Icon(ic, color: Colors.amber), // 錠のアイコン
+          const RowSpace(w: 10),
+          Text(text, style: const TextStyle(color: Colors.amber)),
+        ],
+      ),
     );
   }
 }

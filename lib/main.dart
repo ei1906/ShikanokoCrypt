@@ -90,7 +90,7 @@ class _FormsState extends State<Forms> {
     );
   }
 
-  Widget getFrame(double h, double w, Widget c) {
+  /*Widget getFrame(double h, double w, Widget c) {
     return Container(
       height: h,
       width: w,
@@ -102,9 +102,32 @@ class _FormsState extends State<Forms> {
         ),
       ),
     );
+  }*/
+  Widget getFrame(double h, double w, Widget c) {
+    return Container(
+      height: h,
+      width: w,
+      child: c,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(15), // 角を丸く
+        border: Border.all(
+          color: Colors.brown, // シカの色を意識
+          width: 3,
+        ),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.brown.shade200, // シカの影をイメージ
+            blurRadius: 10,
+            spreadRadius: 2,
+            offset: Offset(4, 4),
+          ),
+        ],
+      ),
+    );
   }
 
-  Widget getInputForm(String hint) {
+  /*Widget getInputForm(String hint) {
     return TextField(
       maxLength: 30,
       maxLines: 5,
@@ -120,36 +143,72 @@ class _FormsState extends State<Forms> {
         border: InputBorder.none,
       ),
     );
+  }*/
+
+  Widget getInputForm(String hint) {
+    return TextField(
+      maxLines: 5,
+      onChanged: (value) {
+        inputText = value;
+      },
+      style: TextStyle(
+        fontSize: 20.0, // 少し小さめにして調整
+        color: Colors.brown.shade800, // シカを意識したブラウン
+      ),
+      decoration: InputDecoration(
+        hintText: hint,
+        hintStyle: TextStyle(color: Colors.brown.shade300),
+        filled: true,
+        fillColor: Colors.brown.shade100, // 優しい背景色
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10),
+          borderSide: BorderSide.none, // フレームなしで柔らかさを強調
+        ),
+        counterText: '',
+      ),
+    );
   }
 
-  Widget getResultForm() {
+  /*Widget getResultForm() {
     return SelectableText(resultText);
+  }*/
+  Widget getResultForm() {
+    return Container(
+      padding: EdgeInsets.all(10),
+      decoration: BoxDecoration(
+        color: Colors.brown.shade100,
+        borderRadius: BorderRadius.circular(10),
+        border: Border.all(color: Colors.brown.shade400),
+      ),
+      child: SelectableText(
+        resultText,
+        style: TextStyle(
+          fontSize: 20.0,
+          color: Colors.brown.shade800,
+        ),
+      ),
+    );
   }
 
   Widget getButtons() {
     return Row(
       children: [
+        const Spacer(),
         getButton('暗号化', () {
           setState(() {
             resultText = onclickEncrypt(inputText);
           });
-        }, Icons.lock),
-        const RowSpace(w: 20),
+        }, Icons.lock_outline),
+        const Spacer(),
         getButton('復号', () {
           setState(() {
             resultText = onclickDecrypt(inputText);
           });
         }, Icons.lock_open),
+        const Spacer(),
       ],
     );
   }
-
-  /*Widget getButton(String text, void Function() callback) {
-    return OutlinedButton(
-      onPressed: callback,
-      child: Text(text),
-    );
-  }*/
 
   Widget getButton(String text, void Function() callback, IconData ic) {
     return ElevatedButton(

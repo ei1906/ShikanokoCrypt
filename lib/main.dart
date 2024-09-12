@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import './back.dart';
 
 void main() {
@@ -20,17 +21,45 @@ class MyApp extends StatelessWidget {
 class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return getHomeScreen();
+    return Scaffold(
+        body: Stack(
+      children: [
+        getBackground(),
+        getHomeScreen(),
+      ],
+    ));
+  }
+
+  Widget getBackground() {
+    return Stack(children: [
+      Align(
+        alignment: Alignment.topLeft,
+        child: Image.asset(
+          'images/bg1.jpg',
+        ),
+      ),
+      Align(
+        alignment: Alignment.topRight,
+        child: Image.asset('images/bg2.jpg'),
+      ),
+      Align(
+        alignment: Alignment.bottomLeft,
+        child: Image.asset('images/bg3.jpg'),
+      ),
+      Align(
+        alignment: Alignment.bottomRight,
+        child: Image.asset('images/bg4.jpg'),
+      ),
+    ]);
   }
 
   Widget getHomeScreen() {
-    return Scaffold(
-        body: Center(
+    return Center(
       child: SizedBox(
         width: 700,
         child: AppContents(),
       ),
-    ));
+    );
   }
 }
 

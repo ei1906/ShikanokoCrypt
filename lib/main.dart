@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import './back.dart';
 
 void main() {
@@ -119,19 +118,6 @@ class _FormsState extends State<Forms> {
     );
   }
 
-  /*Widget getFrame(double h, double w, Widget c) {
-    return Container(
-      height: h,
-      width: w,
-      child: c,
-      decoration: BoxDecoration(
-        border: Border.all(
-          color: Colors.brown, // 枠線の色を設定
-          width: 3, // 枠線の太さを設定
-        ),
-      ),
-    );
-  }*/
   Widget getFrame(double h, double w, Widget c) {
     return Container(
       height: h,
@@ -155,24 +141,6 @@ class _FormsState extends State<Forms> {
       ),
     );
   }
-
-  /*Widget getInputForm(String hint) {
-    return TextField(
-      maxLength: 30,
-      maxLines: 5,
-      onChanged: (value) {
-        inputText = value;
-      },
-      style: TextStyle(
-        fontSize: 30.0, // フォントサイズを設定
-      ),
-      decoration: InputDecoration(
-        hintText: hint,
-        counterText: '',
-        border: InputBorder.none,
-      ),
-    );
-  }*/
 
   Widget getInputForm(String hint) {
     return TextField(
@@ -198,9 +166,6 @@ class _FormsState extends State<Forms> {
     );
   }
 
-  /*Widget getResultForm() {
-    return SelectableText(resultText);
-  }*/
   Widget getResultForm() {
     return Container(
       padding: EdgeInsets.all(10),

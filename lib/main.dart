@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import './back.dart';
 
 void main() {
@@ -124,9 +125,15 @@ class _FormsState extends State<Forms> {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        getFrame(100, 700, getInputForm('Input')),
+        FractionallySizedBox(
+          widthFactor: 0.9,
+          child: getFrame(100, 700, getInputForm('Input')),
+        ),
         const ColumnSpace(h: 10),
-        getFrame(200, 700, getResultForm()),
+        FractionallySizedBox(
+          widthFactor: 0.9,
+          child: getFrame(200, 700, getResultForm()),
+        ),
         const ColumnSpace(h: 10),
         getButtons(),
       ],
@@ -182,21 +189,35 @@ class _FormsState extends State<Forms> {
   }
 
   Widget getResultForm() {
-    return Container(
-      padding: EdgeInsets.all(10),
-      decoration: BoxDecoration(
-        color: Colors.brown.shade100,
-        borderRadius: BorderRadius.circular(10),
-        border: Border.all(color: Colors.brown.shade400),
-      ),
-      child: SelectableText(
-        resultText,
-        style: TextStyle(
-          fontSize: 20.0,
-          color: Colors.brown.shade800,
+    return Stack(children: [
+      Container(
+        width: 700,
+        height: 200,
+        padding: const EdgeInsets.all(10),
+        decoration: BoxDecoration(
+          color: Colors.brown.shade100,
+          borderRadius: BorderRadius.circular(10),
+          border: Border.all(color: Colors.brown.shade400),
+        ),
+        child: SelectableText(
+          resultText,
+          style: TextStyle(
+            fontSize: 20.0,
+            color: Colors.brown.shade800,
+          ),
         ),
       ),
-    );
+      Positioned(
+        top: 0,
+        right: 0,
+        child: Transform.translate(
+            offset: const Offset(-1, -16),
+            child: Opacity(
+              opacity: 0.5,
+              child: getCopyButton(),
+            )),
+      )
+    ]);
   }
 
   Widget getButtons() {
@@ -227,7 +248,7 @@ class _FormsState extends State<Forms> {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10), // 錠前の丸みを意識
         ),
-        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
       ),
       child: Row(
         children: [
@@ -237,6 +258,26 @@ class _FormsState extends State<Forms> {
         ],
       ),
     );
+  }
+
+  Widget getCopyButton() {
+    return ElevatedButton(
+        onPressed: () {
+          Clipboard.setData(ClipboardData(text: resultText));
+        },
+        style: ElevatedButton.styleFrom(
+          backgroundColor: Colors.white,
+          minimumSize: const Size(20, 15),
+          shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.only(
+            topRight: Radius.circular(10.0),
+            bottomLeft: Radius.circular(10.0),
+          )),
+        ),
+        child: const Text(
+          "Copy",
+          style: TextStyle(fontSize: 10),
+        ));
   }
 }
 

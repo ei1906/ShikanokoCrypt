@@ -264,6 +264,13 @@ class _FormsState extends State<Forms> {
     return ElevatedButton(
         onPressed: () {
           Clipboard.setData(ClipboardData(text: resultText));
+
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text("コピーしました！"),
+              duration: Duration(seconds: 2), // 表示時間を2秒に設定
+            ),
+          );
         },
         style: ElevatedButton.styleFrom(
           backgroundColor: Colors.white,

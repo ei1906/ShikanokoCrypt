@@ -21,12 +21,13 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Stack(
+        body: SingleChildScrollView(
+            child: Stack(
       children: [
         getBackground(),
         getHomeScreen(),
       ],
-    ));
+    )));
   }
 
   Widget getBackground() {

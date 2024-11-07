@@ -24,33 +24,46 @@ class HomeScreen extends StatelessWidget {
         body: SingleChildScrollView(
             child: Stack(
       children: [
-        getBackground(),
+        getBackground(context),
         getHomeScreen(),
       ],
     )));
   }
 
-  Widget getBackground() {
-    return Stack(children: [
-      Align(
-        alignment: Alignment.topLeft,
-        child: Image.asset(
-          'images/bg1.png',
-        ),
-      ),
-      Align(
-        alignment: Alignment.topRight,
-        child: Image.asset('images/bg2.png'),
-      ),
-      Align(
-        alignment: Alignment.bottomLeft,
-        child: Image.asset('images/bg3.png'),
-      ),
-      Align(
-        alignment: Alignment.bottomRight,
-        child: Image.asset('images/bg4.png'),
-      ),
-    ]);
+  Widget getBackground(BuildContext context) {
+    return SizedBox(
+        height: MediaQuery.of(context).size.height,
+        width: MediaQuery.of(context).size.width,
+        child: Stack(children: [
+          Align(
+            alignment: Alignment.topLeft,
+            child: Image.asset(
+              'images/bg1.png',
+              width: MediaQuery.of(context).size.width * 0.3,
+            ),
+          ),
+          Align(
+            alignment: Alignment.topRight,
+            child: Image.asset(
+              'images/bg2.png',
+              width: MediaQuery.of(context).size.width * 0.3,
+            ),
+          ),
+          Align(
+            alignment: Alignment.bottomLeft,
+            child: Image.asset(
+              'images/bg3.png',
+              width: MediaQuery.of(context).size.width * 0.3,
+            ),
+          ),
+          Align(
+            alignment: Alignment.bottomRight,
+            child: Image.asset(
+              'images/bg4.png',
+              width: MediaQuery.of(context).size.width * 0.3,
+            ),
+          ),
+        ]));
   }
 
   Widget getHomeScreen() {
@@ -80,10 +93,11 @@ class AppContents extends StatelessWidget {
   }
 
   Widget getTitleLogo() {
-    return Image.asset(
-      'images/shikanoko_logo.png',
-      width: 400,
-    );
+    return FractionallySizedBox(
+        widthFactor: 0.7,
+        child: Image.asset(
+          'images/shikanoko_logo.png',
+        ));
   }
 
   Widget getForms() {

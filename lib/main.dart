@@ -35,20 +35,20 @@ class HomeScreen extends StatelessWidget {
       Align(
         alignment: Alignment.topLeft,
         child: Image.asset(
-          'images/bg1.jpg',
+          'images/bg1.png',
         ),
       ),
       Align(
         alignment: Alignment.topRight,
-        child: Image.asset('images/bg2.jpg'),
+        child: Image.asset('images/bg2.png'),
       ),
       Align(
         alignment: Alignment.bottomLeft,
-        child: Image.asset('images/bg3.jpg'),
+        child: Image.asset('images/bg3.png'),
       ),
       Align(
         alignment: Alignment.bottomRight,
-        child: Image.asset('images/bg4.jpg'),
+        child: Image.asset('images/bg4.png'),
       ),
     ]);
   }
@@ -81,7 +81,7 @@ class AppContents extends StatelessWidget {
 
   Widget getTitleLogo() {
     return Image.asset(
-      'images/shikanoko_logo.jpg',
+      'images/shikanoko_logo.png',
       width: 400,
     );
   }

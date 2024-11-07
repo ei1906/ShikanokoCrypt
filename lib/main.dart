@@ -14,6 +14,7 @@ class MyApp extends StatelessWidget {
       title: 'しかのこ暗号',
       theme: ThemeData.light(),
       home: HomeScreen(),
+      debugShowCheckedModeBanner: false,
     );
   }
 }
